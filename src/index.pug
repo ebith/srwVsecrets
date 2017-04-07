@@ -1,0 +1,55 @@
+doctype html
+html(lang='ja')
+  head
+    title スーパーロボット大戦V 隠し要素
+    meta(charset='UTF-8')
+    meta(name='viewport', content='width=device-width,initial-scale=1')
+    style [v-cloak] { display: none; }
+  body
+    .container#srwVsecrets
+      header
+        h2.title スーパーロボット大戦V 隠し要素
+        .option.u-pull-right
+          .bold 非表示
+          label
+            input#hideEpisode(type='checkbox', v-on:click='hideOther')
+            input#episodeNumber(type='number', v-on:change='hideOther')
+            span.label-body 話以外
+          label
+            input(type='checkbox', v-on:click='toggleHidden(".onlyFirstLap", $event)')
+            span.label-body 一周目限定
+          label
+            input(type='checkbox', v-on:click='toggleHidden(".onlyNormalRoute", $event)')
+            span.label-body 通常ルート限定
+
+      .main
+        h6.listCaption 撃墜数が関係するもの
+        ul
+          li 17話 舞人、 トライボンバー、 ガードダイバーの合計撃墜数60以上
+          li 27話 宗介の撃墜数が40以上及び 宗介、 マオ、 クルツ、 クルーゾー、 テッサの合計撃墜数が100以上
+          li.onlyNormalRoute 35話 ジュドーがエースパイロット
+          li.onlyFirstLap 36話 ルリがエースパイロット
+          li 39話 シンジがエースパイロット (代替条件有り)
+          li 42話 沖田がエースパイロット (代替条件有り)
+          li 50話 開始時点でエースパイロット25人、グレートエース1人以上
+        section(v-for='secret in secrets',v-cloak , v-bind:class='secret.meta')
+          h6.name {{ secret.secret }}
+
+          div(v-for='requirement in secret.requirements')
+            div(v-if='Array.isArray(requirement)')
+              div(v-for='v in requirement').piece
+                label
+                  input(type='radio', name='requirement', v-on:click.shift='uncheck', v-model='state[secret.secret][v]')
+                  span.label-body {{ v }}
+            div(v-else).piece
+              label
+                input(type='checkbox', v-model='state[secret.secret][requirement]')
+                span.label-body {{ requirement }}
+            .points-box(v-if='secret.points')
+              label
+                input.points(type='text', size='2', readonly, v-model='state[secret.secret].points')
+                span.label-body ポイント
+              div(v-for='vv in secret.points').piece
+                label
+                  input(type='checkbox', v-bind:name='vv', v-on:click='checkPoints(secret.secret, $event)', v-model='state[secret.secret][vv]')
+                  span.label-body {{ vv }}
