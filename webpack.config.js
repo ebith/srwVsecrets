@@ -23,6 +23,9 @@ module.exports = {
   resolve: {
     alias: {}
   },
+  node: {
+    Buffer: false
+  },
 };
 module.exports.resolve.alias.vue = process.env.NODE_ENV === 'production' ? 'vue/dist/vue.min.js' : 'vue/dist/vue.js'
 if (process.env.NODE_ENV === 'production') {
