@@ -2,6 +2,7 @@ doctype html
 html(lang='ja')
   head
     title スーパーロボット大戦V 隠し要素
+    meta(name='description', content='スーパーロボット大戦Vの隠し要素を管理できるページ')
     meta(charset='UTF-8')
     meta(name='viewport', content='width=device-width,initial-scale=1')
     style [v-cloak] { display: none; }
@@ -32,6 +33,7 @@ html(lang='ja')
           li 39話 シンジがエースパイロット (代替条件有り)
           li 42話 沖田がエースパイロット (代替条件有り)
           li 50話 開始時点でエースパイロット25人、グレートエース1人以上
+
         section(v-for='secret in secrets',v-cloak , v-bind:class='secret.meta')
           h6.name {{ secret.secret }}
 
@@ -53,3 +55,8 @@ html(lang='ja')
                 label
                   input(type='checkbox', v-bind:name='vv', v-on:click='checkPoints(secret.secret, $event)', v-model='state[secret.secret][vv]')
                   span.label-body {{ vv }}
+
+      .footer.u-pull-right
+        a.button(v-on:click='reset()') RESET
+
+    script(src='./index.js')

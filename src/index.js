@@ -1,10 +1,9 @@
-/* eslint-disable no-console */
 import './normalize.css';
 import './skeleton.css';
 import './index.css';
 
-import vue from 'vue';
-import secrets from './secrets.js';
+import Vue from 'vue/dist/vue.esm.js';
+import secrets from './secrets';
 
 const storage = localStorage.getItem('srwVsecrets');
 let state = {};
@@ -21,6 +20,7 @@ if (storage) {
       } else {
         state[secret.secret][requirement] = false;
       }
+
       if (secret.points) {
         state[secret.secret].points = 0;
         for (const vv of secret.points) {
@@ -32,11 +32,11 @@ if (storage) {
 }
 
 window.addEventListener('load', () => {
-  new vue({
+  new Vue({
     el: '#srwVsecrets',
     data: {
-      secrets: secrets,
-      state: state
+      secrets,
+      state
     },
     watch: {
       state: {
@@ -47,18 +47,24 @@ window.addEventListener('load', () => {
       }
     },
     methods: {
+      reset: () => {
+        localStorage.removeItem('srwVsecrets');
+        location.reload(true);
+      },
       hideOther: () => {
-        const searchSection = (element) => {
-          if (element.parentNode.tagName == 'SECTION') {
+        const searchSection = element => {
+          if (element.parentNode.tagName === 'SECTION') {
             return element.parentNode;
-          } else {
-            return searchSection(element.parentNode);
           }
+
+          return searchSection(element.parentNode);
         };
-        const checked = document.querySelector('#hideEpisode').checked;
+
+        const {checked} = document.querySelector('#hideEpisode');
         for (const section of document.querySelectorAll('section')) {
           checked ? section.classList.add('hidden') : section.classList.remove('hidden');
         }
+
         const episodeNumber = document.querySelector('#episodeNumber').value || '0';
         for (const piece of document.querySelectorAll('.piece')) {
           if (piece.textContent.includes(`${episodeNumber.length < 2 ? '0' + episodeNumber : episodeNumber}話`)) {
@@ -71,7 +77,7 @@ window.addEventListener('load', () => {
           event.target.checked ? element.classList.add('hidden') : element.classList.remove('hidden');
         }
       },
-      uncheck: (event) => {
+      uncheck: event => {
         event.target.checked = false;
       },
       checkPoints: (name, event) => {

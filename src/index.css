@@ -1,6 +1,6 @@
-input[type='number'] {
-   width: 5.5rem;
-   margin-left: 5px;
+input[type="number"] {
+  width: 5.5rem;
+  margin-left: 5px;
 }
 li {
   margin-bottom: 0;
@@ -13,28 +13,32 @@ li {
   display: none;
 }
 
-input[type='text'].points {
+input[type="text"].points {
   height: 32px;
   padding-top: 0;
   padding-bottom: 0;
 }
 .points-box {
-  border: 1px solid #E1E1E1;
+  border: 1px solid #e1e1e1;
   border-radius: 4px;
-  padding: .5rem;
+  padding: 0.5rem;
   padding-left: 2rem;
 }
 
-.bold { font-weight: bold; }
+.bold {
+  font-weight: bold;
+}
 
 .option {
   text-align: right;
-  border: 1px solid #E1E1E1;
+  border: 1px solid #e1e1e1;
   border-radius: 4px;
-  padding: .5rem;
+  padding: 0.5rem;
 }
 
-section { margin-bottom: 1rem; }
+section {
+  margin-bottom: 1rem;
+}
 
 .name {
   margin-bottom: 0;
@@ -52,3 +56,6 @@ h6 {
   font-weight: bold;
 }
 
+.footer {
+  margin-top: 5rem;
+}
