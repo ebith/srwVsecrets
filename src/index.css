@@ -59,3 +59,11 @@ h6 {
 .footer {
   margin-top: 5rem;
 }
+
+label {
+  white-space: nowrap;
+}
+
+.label-body {
+  white-space: normal;
+}
