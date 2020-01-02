@@ -30,6 +30,7 @@
     "iOS 12"
   ],
   "scripts": {
+    "prebuild": "rm -rf dist/*",
     "build": "parcel build src/index.pug --no-source-maps --no-cache --public-url ."
   },
   "devDependencies": {
